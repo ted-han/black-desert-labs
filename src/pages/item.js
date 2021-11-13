@@ -33,13 +33,15 @@ export const query = graphql`
         }
       }
     }
-    ingredient(name: { eq: $name }) {
-      id
-      name
-      incredient
-      craft {
+
+    allIngredient(filter: { ingredient: { eq: $name } }) {
+      nodes {
         name
-        cnt
+        ingredient
+        craft {
+          name
+          cnt
+        }
       }
     }
   }
