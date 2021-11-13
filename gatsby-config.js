@@ -3,5 +3,5 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "Black Desert Labs",
   },
-  plugins: [],
+  plugins: [`gatsby-plugin-react-helmet`, `gatsby-plugin-postgresql`],
 };
