@@ -34,7 +34,7 @@ const getIngredientInfo = () => {
       )
       SELECT 
         step1.name,
-        step1.craft as incredient,
+        step1.craft as ingredient,
         step2.craft
       FROM step1 
       INNER JOIN step2
