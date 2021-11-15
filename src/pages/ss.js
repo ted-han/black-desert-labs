@@ -13,12 +13,21 @@ const pageStyles = {
 const IndexPage = ({ data }) => {
   console.log(data);
   const arrData = data.allCraft.nodes;
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const param = urlSearchParams.get("q");
-  console.log(param);
 
   const [updateData, setUpdateData] = useState([]);
   const [value, setValue] = useState("");
+  const [q, setQ] = useState("");
+
+  useEffect(() => {
+    console.log("컴포넌트가 화면에 나타남");
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const param = urlSearchParams.get("q");
+    console.log(param);
+    setQ(param);
+    return () => {
+      console.log("컴포넌트가 화면에서 사라짐");
+    };
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,7 +57,7 @@ const IndexPage = ({ data }) => {
       </form>
       <div>
         {arrData
-          .filter((v) => v.item_name.includes(param))
+          .filter((v) => v.item_name.includes(q))
           .map((v) => (
             <div key={v.id}>
               <a href={v.item_name.replace(/ /gi, "-")}>{v.item_name}</a>
