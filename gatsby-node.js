@@ -6,7 +6,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allCraft {
         nodes {
           id
-          name
+          item_name
         }
       }
     }
@@ -14,12 +14,11 @@ exports.createPages = async ({ graphql, actions }) => {
 
   data.allCraft.nodes.forEach((node) => {
     actions.createPage({
-      // path: `${node.name.replace(/ /gi, "-")}`,
-      path: node.name,
+      path: `${node.item_name.replace(/ /gi, "-")}`,
       component: require.resolve(`./src/pages/item.js`),
       context: {
         id: node.id,
-        name: node.name,
+        name: node.item_name,
       },
     });
   });

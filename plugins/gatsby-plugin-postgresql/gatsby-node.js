@@ -3,13 +3,26 @@ const knex = require("./db");
 const getCraftInfo = () => {
   return knex.raw(
     `
-      SELECT 
-        name,
-        1 as cnt,        
-        string_agg(concat('{"name":"',craft,'","cnt":',cnt,'}'), ', ') as craft,
-        levelone
-      FROM test
-      GROUP BY name, levelone;
+    select
+      item_id,
+      item_name,
+      1 as cnt,
+      string_agg(concat('{"item_name":"',ingredient,'","item_id":',coalesce((select item_id from items where item_name=ingredient),0),',"cnt":',ingredient_cnt,'}'), ', ') as craft,
+      is_basic,
+      category
+    from (
+      select 
+        i.item_id,
+        i.item_name,
+        c.ingredient,
+        coalesce(c.ingredient_cnt,0) as ingredient_cnt,
+        i.is_basic,
+        i.category
+      from items i
+      left join craft c
+      on i.item_name = c.craft_name
+    ) x
+    group by item_id, item_name, is_basic, category;
   `,
     [],
   );
@@ -18,28 +31,42 @@ const getCraftInfo = () => {
 const getIngredientInfo = () => {
   return knex.raw(
     `
-      WITH step1 AS (
-        SELECT * 
-        FROM test
-        WHERE craft is not null
-      ),
-      step2 AS (
-        SELECT 
-          name,
-          1 as cnt,
-          string_agg(concat('{"name":"',craft,'","cnt":',cnt,'}'), ', ') as craft,
-          levelone
-        FROM test
-        GROUP BY name, levelone
-      )
+    WITH step1 AS (
       SELECT 
-        step1.name,
-        step1.craft as ingredient,
-        step2.craft
-      FROM step1 
-      INNER JOIN step2
-      ON step1.name = step2.name
-      ORDER BY step1.craft;
+        craft_name,
+        ingredient
+      FROM craft
+    ),
+    step2 AS (
+      select
+        item_id,
+        item_name,
+        1 as cnt,
+        string_agg(concat('{"item_name":"',ingredient,'","item_id":',coalesce((select item_id from items where item_name=ingredient),0),',"cnt":',ingredient_cnt,'}'), ', ') as craft,
+        is_basic,
+        category
+      from (
+        select 
+          i.item_id,
+          i.item_name,
+          c.ingredient,
+          coalesce(c.ingredient_cnt,0) as ingredient_cnt,
+          i.is_basic,
+          i.category
+        from items i
+        left join craft c
+        on i.item_name = c.craft_name
+      ) x
+      group by item_id, item_name, is_basic, category
+    )
+    SELECT 
+      step1.craft_name as name,
+      step1.ingredient,
+      step2.craft
+    FROM step1 
+    INNER JOIN step2
+    ON step1.craft_name = step2.item_name
+    ORDER BY step1.craft_name;
   `,
     [],
   );
@@ -65,32 +92,32 @@ exports.sourceNodes = async ({
   // 오브젝트로 저장
   const resultObj = {};
   for (let i = 0; i < updateResultCraftInfo.length; i++) {
-    const name = updateResultCraftInfo[i].name;
+    const name = updateResultCraftInfo[i].item_name;
     resultObj[name] = updateResultCraftInfo[i];
   }
 
   // craft 얻어오는 재귀함수
   const getCraft = (o) => {
-    if (o.levelone) {
+    if (o.is_basic) {
       return [];
     }
 
     const cc = o.craft.map((v, index) => {
-      if (!resultObj[v.name].levelone) {
+      if (!resultObj[v.item_name].is_basic) {
         return {
           ...v,
-          levelone: resultObj[v.name].levelone,
+          is_basic: resultObj[v.item_name].is_basic,
           craft: getCraft({
             ...v,
-            levelone: resultObj[v.name].levelone,
-            craft: resultObj[v.name].craft,
+            is_basic: resultObj[v.item_name].is_basic,
+            craft: resultObj[v.item_name].craft,
           }),
         };
       }
       return {
         ...v,
-        levelone: resultObj[v.name].levelone,
-        craft: resultObj[v.name].craft,
+        is_basic: resultObj[v.item_name].is_basic,
+        craft: resultObj[v.item_name].craft,
       };
     });
     return cc;
