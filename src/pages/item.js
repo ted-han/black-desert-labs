@@ -1,45 +1,49 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 
-export default function ItemInfo({ data }) {
+import ItemInfo from "../components/item-info";
+
+export default function Item({ data }) {
   console.log(data);
-  return <pre>{JSON.stringify(data, null, 4)}</pre>;
+
+  return <ItemInfo data={data} />;
+
+  // return <pre>{JSON.stringify(data, null, 4)}</pre>;
 }
 
 export const query = graphql`
-  query ($id: String!, $name: String!) {
+  query ($id: String, $name: String) {
     craft(id: { eq: $id }) {
       id
-      name
+      item_id
+      item_name
       cnt
-      levelone
+      is_basic
       craft {
-        name
+        item_id
+        item_name
+        is_basic
         cnt
-        levelone
         craft {
-          name
+          item_id
+          item_name
+          is_basic
           cnt
-          levelone
           craft {
-            name
+            item_id
+            item_name
             cnt
-            levelone
-            craft {
-              name
-              cnt
-            }
           }
         }
       }
     }
-
     allIngredient(filter: { ingredient: { eq: $name } }) {
       nodes {
         name
         ingredient
         craft {
-          name
+          item_id
+          item_name
           cnt
         }
       }
