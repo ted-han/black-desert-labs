@@ -1,67 +1,84 @@
 import React, { useState } from "react";
-import { Link, graphql, StaticQuery } from "gatsby";
+import { Link, graphql, StaticQuery, navigate } from "gatsby";
 
-const Search = (props) => {
-  console.log(props);
-  const emptyQuery = "";
+import {
+  searchLogo,
+  searchWrapper,
+  searchInput,
+  searchButton,
+  searchList,
+  searchInputWrapper,
+} from "./search.module.css";
 
-  const [state, setState] = useState({
-    filteredData: [],
-    query: emptyQuery,
-  });
+const SearchComponent = ({ data }) => {
+  const [value, setValue] = useState("");
+  const itemArr = data.allCraft.nodes || [];
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(state.query);
+  const handleClickSearch = () => {
+    navigate(`/search?q=${value}`);
   };
+
   const handleInputChange = (event) => {
-    const query = event.target.value;
-    const { data } = props;
-    console.log(data);
-    const posts = data.allCraft.nodes || [];
+    setValue(event.target.value);
+  };
 
-    const filteredData = posts.filter((post) => {
-      console.log(post);
-      console.log(query);
-      return post.item_name.includes(query) && query !== "";
-    });
-
-    setState({
-      query,
-      filteredData,
-    });
+  const handleInputKeyDown = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/search?q=${value}`);
+    }
   };
 
   const renderSearchResults = () => {
-    const { query, filteredData } = state;
-    const hasSearchResults = filteredData && query !== emptyQuery;
-    const posts = hasSearchResults ? filteredData : [];
-    console.log(posts);
+    const itemFilter = itemArr.filter(
+      (v) => v.item_name.includes(value) && value !== "",
+    );
+
+    if (itemFilter.length === 0) {
+      return null;
+    }
+
     return (
-      posts &&
-      posts.map(({ item_name }) => {
-        return <div>{item_name}</div>;
-      })
+      <ul>
+        {itemFilter.map(({ id, item_name }) => {
+          console.log(item_name.replace(/ /gi, "-"));
+          return (
+            <li key={id}>
+              <Link to={`/${item_name.replace(/ /gi, "-")}`}>{item_name}</Link>
+            </li>
+          );
+        })}
+      </ul>
     );
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input type="text" value={state.query} onChange={handleInputChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      {renderSearchResults()}
+      <div id={searchWrapper}>
+        <div id={searchLogo}></div>
+        <div id={searchInputWrapper}>
+          <input
+            id={searchInput}
+            type="text"
+            value={value}
+            onChange={handleInputChange}
+            onKeyDown={handleInputKeyDown}
+            maxLength="16"
+            autoFocus
+          />
+        </div>
+        <div id={searchButton} onClick={handleClickSearch}>
+          <span>&#128269;</span>
+        </div>
+      </div>
+      <div id={searchList}>{renderSearchResults()}</div>
     </div>
   );
 };
 
-export default (props) => (
+export default () => (
   <StaticQuery
     query={graphql`
-      query {
+      {
         allCraft {
           nodes {
             id
@@ -70,6 +87,6 @@ export default (props) => (
         }
       }
     `}
-    render={(data) => <Search data={data} {...props} />}
+    render={(data) => <SearchComponent data={data} />}
   />
 );
