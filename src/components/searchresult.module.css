@@ -1,0 +1,41 @@
+#searchReulstList {
+  margin-top: 20px; 
+}
+#searchReulstListName   {
+  margin: 0;
+  padding: 1rem;
+  background: gray
+}
+
+#searchReulstList ul {
+  margin: 0px;
+  padding: 0px;
+  border-top: 1px solid #6d6d6d;
+  border-bottom: 1px solid #6d6d6d;
+}
+#searchReulstList li {
+  list-style: none;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+}
+#searchReulstList li+li {
+  border-top: 1px solid #6d6d6d;
+}
+#searchReulstList li:hover {
+  background: #f6f6f6;
+}
+#searchReulstList li a {
+  display: block;
+}
+#searchReulstList li a:link,
+#searchReulstList li a:visited,
+#searchReulstList li a:active {
+  text-decoration: none;
+  color: black;
+}
+
+#searchReulstList li a:hover{
+  text-decoration: underline;
+  color: black;
+}
