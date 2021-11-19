@@ -1,0 +1,64 @@
+table {
+    border: 1px solid #7a5d4b;
+    border-collapse: collapse;
+    width: 100%;
+}
+thead {
+  background: #313138;
+  color: #bc8e61;
+}
+th {
+  border: 1px solid #7a5d4b;
+  padding: 6px; 
+}
+td {
+  border: 1px solid #7a5d4b;
+  padding: 0 6px; 
+}
+h3 {
+  margin-bottom: 0;
+}
+
+
+
+.itemWrapperHeader {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.itemWrapperHeader > h4 {
+  margin-left: 2rem;
+} 
+.itemWrapperFooter {
+  float: right;
+}
+.itemWrapper {
+  display: flex;
+  align-items: center;
+
+}
+.itemBox{
+  display: flex;
+  flex-direction: column;
+  margin: 6px 4px;
+  cursor: pointer;
+}
+.itemBox > span{
+  text-align: center;
+  font-size: 0.8rem;
+}
+.itemBoxHeader{
+  position: relative;
+}
+.itemBoxHeader > span{
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 10;
+}
+
+
+#ingredientWrapper {
+  display: flex;
+  width: 100%;
+}
