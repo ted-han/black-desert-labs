@@ -1,14 +1,19 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 
 import ItemInfo from "../components/item-info";
+import SearchComponent from "../components/search";
 
 export default function Item({ data }) {
   console.log(data);
 
-  return <ItemInfo data={data} />;
-
-  // return <pre>{JSON.stringify(data, null, 4)}</pre>;
+  return (
+    <main>
+      <title>검은사막</title>
+      <SearchComponent page="" />
+      <ItemInfo data={data} />
+    </main>
+  );
 }
 
 export const query = graphql`
@@ -33,6 +38,13 @@ export const query = graphql`
             item_id
             item_name
             cnt
+            is_basic
+            craft {
+              item_id
+              item_name
+              cnt
+              is_basic
+            }
           }
         }
       }
