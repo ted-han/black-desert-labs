@@ -6,6 +6,7 @@ import SearchResultComponent from "../components/search-result";
 
 const IndexPage = ({ data }) => {
   const [query, setQuery] = useState("");
+  const [search, setSearch] = useState("");
   const filterData = data.allCraft.nodes.filter(
     (v) => v.item_name.includes(query) && query !== "",
   );
@@ -14,6 +15,13 @@ const IndexPage = ({ data }) => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const param = urlSearchParams.get("q");
     setQuery(param);
+    return;
+  }, [search]);
+
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const param = urlSearchParams.get("q");
+    setSearch(param);
     return;
   }, []);
 
