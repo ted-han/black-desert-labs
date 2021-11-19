@@ -6,7 +6,7 @@ const IndexPage = () => {
     <main>
       <title>검은사막</title>
       <h1>검은사막 연구소</h1>
-      <SearchComponent />
+      <SearchComponent page="main" />
       <h2>검은사막 연구소</h2>
     </main>
   );

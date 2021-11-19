@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link, graphql, StaticQuery, navigate } from "gatsby";
 
 import {
-  searchLogo,
+  searchWrapperMain,
   searchWrapper,
+  searchLogo,
   searchInput,
   searchButton,
   searchList,
@@ -40,18 +41,20 @@ const SearchComponent = ({ data, page }) => {
   };
 
   const renderSearchResults = () => {
-    //자동완성 x개까지만 제한
-    const itemFilter = itemArr.filter(
-      (v) => v.item_name.includes(value) && value !== "",
-    );
-
-    if (itemFilter.length === 0) {
+    // 자동완성 7개까지만 보여주기
+    const itemFilterArr = [];
+    for (let i = 0; i < itemArr.length; i++) {
+      if (itemFilterArr.length === 7) break;
+      if (itemArr[i].item_name.includes(value) && value !== "") {
+        itemFilterArr.push(itemArr[i]);
+      }
+    }
+    if (itemFilterArr.length === 0) {
       return null;
     }
-
     return (
       <ul>
-        {itemFilter.map(({ id, item_name }) => {
+        {itemFilterArr.map(({ id, item_name }) => {
           return (
             <li key={id}>
               <Link to={`/${item_name.replace(/ /gi, "-")}`}>{item_name}</Link>
@@ -64,8 +67,12 @@ const SearchComponent = ({ data, page }) => {
 
   return (
     <div>
-      <div id={searchWrapper}>
-        <div id={searchLogo}></div>
+      <div id={page === "main" ? searchWrapperMain : searchWrapper}>
+        <div id={searchLogo}>
+          <Link to={`/`}>
+            <img src={`/black.png`} width="100%" />
+          </Link>
+        </div>
         <div id={searchInputWrapper}>
           <input
             id={searchInput}
@@ -80,7 +87,7 @@ const SearchComponent = ({ data, page }) => {
           />
         </div>
         <div id={searchButton} onClick={handleClickSearch}>
-          <span>&#128269;</span>
+          <img src={`/search.png`} width="50%" />
         </div>
       </div>
       <div id={searchList}>{visible && renderSearchResults()}</div>

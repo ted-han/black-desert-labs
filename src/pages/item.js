@@ -5,12 +5,10 @@ import ItemInfo from "../components/item-info";
 import SearchComponent from "../components/search";
 
 export default function Item({ data }) {
-  console.log(data);
-
   return (
     <main>
       <title>검은사막</title>
-      <SearchComponent page="" />
+      <SearchComponent page="item" />
       <ItemInfo data={data} />
     </main>
   );
