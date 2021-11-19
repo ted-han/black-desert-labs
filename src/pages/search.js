@@ -15,7 +15,7 @@ const IndexPage = ({ data }) => {
     const param = urlSearchParams.get("q");
     setQuery(param);
     return;
-  }, [window.location.search]);
+  }, []);
 
   return (
     <main>
