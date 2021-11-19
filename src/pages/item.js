@@ -42,6 +42,12 @@ export const query = graphql`
               item_name
               cnt
               is_basic
+              craft {
+                item_id
+                item_name
+                cnt
+                is_basic
+              }
             }
           }
         }
