@@ -8,16 +8,32 @@ body > div:first-child > div:first-child {
 }
 body {
   margin: 0px;
-  font-family: "-apple-system, Roboto, sans-serif, serif",
+  font-family: "-apple-system, Roboto, sans-serif, serif";
+  background: #1c1c21;
+  color: #888;
 }
 main {
   height: 100%;
-  padding: 5rem;
+  padding: 5rem 10rem;
+  background: #1c1c21;
+}
+main > h1 {
+  text-align: center;
+  margin-bottom: 100px;
+  color: #bc8e61;
 }
 main > h2 {
   display: none;
 }
 
+a {
+  text-decoration: none;
+  color: #888;
+}
+a:hover {
+  color: #595959;
+  text-decoration: underline;
+} 
 
 @media (max-width: 800px) {
   main {

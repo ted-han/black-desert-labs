@@ -4,14 +4,13 @@
 #searchReulstListName   {
   margin: 0;
   padding: 1rem;
-  background: gray
+  background: #313138;
 }
 
 #searchReulstList ul {
   margin: 0px;
-  padding: 0px;
-  border-top: 1px solid #6d6d6d;
-  border-bottom: 1px solid #6d6d6d;
+  padding: 0px; 
+  border-bottom: 1px solid #999999;;
 }
 #searchReulstList li {
   list-style: none;
@@ -20,12 +19,19 @@
   align-items: center;
 }
 #searchReulstList li+li {
-  border-top: 1px solid #6d6d6d;
+  border-top: 1px solid #999999;;
 }
 #searchReulstList li:hover {
-  background: #f6f6f6;
+  background: #4b4b4b;
+  color: #111111;
 }
-#searchReulstList li a {
+
+#searchReulstList li a:hover{
+  text-decoration: underline;
+  color: black;
+} 
+
+/* #searchReulstList li a {
   display: block;
 }
 #searchReulstList li a:link,
@@ -35,7 +41,4 @@
   color: black;
 }
 
-#searchReulstList li a:hover{
-  text-decoration: underline;
-  color: black;
-}
+*/

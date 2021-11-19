@@ -1,45 +1,38 @@
 #searchWrapper {
-  height: 50px;
   display: flex;
   width: 30rem;
+  height: 50px;
+  border: solid 1px #7a5d4b;
+  background: #313138;
+}
+#searchWrapperMain {
+  display: flex;
+  width: 30rem;
+  height: 50px;
+  border: solid 1px #7a5d4b;
+  background: #313138;
   margin: 0 auto;
-  /* border: solid 2px #6d6d6d; */
 }
 
 #searchLogo {
-  width: 3rem;
-  background-size: cover;
-  background-image: url("../images/black.svg");
+  width: 3rem; 
 }
 #searchInputWrapper {
   display: flex;
   align-items: center;
-  width: 90%;
-  border: solid 2px #6d6d6d;
-  border-right: none;
-  border-top-left-radius:  5px;
-  border-bottom-left-radius:  5px;
+  width: 24rem;
 }
 #searchInput {
-  width: 90%;
-  padding: 5px;
+  width: 100%;
+  padding: 5px 0 5px 15px;
   font-size: 18px;
   outline: none;
   border: none;
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
-
+  color: #ffffff;
+  background: #313138;
 }
-#searchInput:focus {
-  /* border: solid 2px #D2691E;  */
-}
-
 #searchButton {
   width: 3rem;
-  border: solid 2px #6d6d6d;
-  border-left: none;
-  border-top-right-radius:  5px;
-  border-bottom-right-radius:  5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,26 +40,21 @@
 #searchButton:hover {
   cursor: pointer;
 }
-#searchButton span {
-  font-size:20px;
-}
-
 
 #searchList {
   width: 30rem;
   margin: 0 auto;
   position: relative;
 }
-
 #searchList ul {
+  width: 27rem;
   position: absolute;
   right: 0px;
-  width: 90%;
-  border: solid 2px #6d6d6d;
+  border: solid 1px #7a5d4b;
   border-top: none;
   margin: 0px;
   padding: 0px;
-  background: white;
+  background: #313138;
 }
 #searchList li {
   list-style: none;
@@ -84,7 +72,7 @@
 #searchList li a:visited,
 #searchList li a:active {
   text-decoration: none;
-  color: black;
+  color: #fff;
 }
 
 
