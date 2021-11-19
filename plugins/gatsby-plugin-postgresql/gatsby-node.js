@@ -116,8 +116,8 @@ exports.sourceNodes = async ({
       }
       return {
         ...v,
-        is_basic: resultObj[v.item_name].is_basic,
-        craft: resultObj[v.item_name].craft,
+        is_basic: true,
+        craft: [],
       };
     });
     return cc;
