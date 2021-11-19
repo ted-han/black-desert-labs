@@ -16,8 +16,7 @@ const SearchResultComponent = ({ query, data = [] }) => {
 
   return (
     <div id={searchReulstList}>
-      <h3>검색어: {query}</h3>
-      <h3 id={searchReulstListName}>검색결과</h3>
+      <h3 id={searchReulstListName}>검색어: {query}</h3>
       <ul>
         {data.map((v) => (
           <li key={v.id}>
