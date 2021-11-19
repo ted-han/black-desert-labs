@@ -10,7 +10,8 @@ import {
   searchInputWrapper,
 } from "./search.module.css";
 
-const SearchComponent = ({ data }) => {
+const SearchComponent = ({ data, page }) => {
+  const [visible, setVisible] = useState(false);
   const [value, setValue] = useState("");
   const itemArr = data.allCraft.nodes || [];
 
@@ -28,7 +29,18 @@ const SearchComponent = ({ data }) => {
     }
   };
 
+  const handleInputBlur = () => {
+    setTimeout(() => {
+      setVisible(false);
+    }, 300);
+  };
+
+  const handleInputFocus = () => {
+    setVisible(true);
+  };
+
   const renderSearchResults = () => {
+    //자동완성 x개까지만 제한
     const itemFilter = itemArr.filter(
       (v) => v.item_name.includes(value) && value !== "",
     );
@@ -40,7 +52,6 @@ const SearchComponent = ({ data }) => {
     return (
       <ul>
         {itemFilter.map(({ id, item_name }) => {
-          console.log(item_name.replace(/ /gi, "-"));
           return (
             <li key={id}>
               <Link to={`/${item_name.replace(/ /gi, "-")}`}>{item_name}</Link>
@@ -62,6 +73,8 @@ const SearchComponent = ({ data }) => {
             value={value}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
+            onBlur={handleInputBlur}
+            onFocus={handleInputFocus}
             maxLength="16"
             autoFocus
           />
@@ -70,12 +83,12 @@ const SearchComponent = ({ data }) => {
           <span>&#128269;</span>
         </div>
       </div>
-      <div id={searchList}>{renderSearchResults()}</div>
+      <div id={searchList}>{visible && renderSearchResults()}</div>
     </div>
   );
 };
 
-export default () => (
+export default ({ page }) => (
   <StaticQuery
     query={graphql`
       {
@@ -87,6 +100,6 @@ export default () => (
         }
       }
     `}
-    render={(data) => <SearchComponent data={data} />}
+    render={(data) => <SearchComponent data={data} page={page} />}
   />
 );
