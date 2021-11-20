@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { graphql } from "gatsby";
 
 import SearchComponent from "../components/search";
 import SearchResultComponent from "../components/search-result";
 
-const IndexPage = ({ data }) => {
-  const [query, setQuery] = useState("");
+const IndexPage = ({ data, location }) => {
+  const urlSearchParamsx = new URLSearchParams(location.search);
+  const query = urlSearchParamsx.get("q");
   const filterData = data.allCraft.nodes.filter(
     (v) => v.item_name.includes(query) && query !== "",
   );
-
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const param = urlSearchParams.get("q");
-    setQuery(param);
-    return;
-  }, [window.location.search]);
 
   return (
     <main>
