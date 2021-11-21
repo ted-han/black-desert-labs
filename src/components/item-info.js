@@ -32,8 +32,6 @@ const ItemBox = ({ data }) => (
 
 const ItemInfo = ({ data }) => {
   if (!data) return null;
-  console.log(data);
-
   // 현재 아이템의 재료 중 조합이 필요한 아이템이 있는지 확인
   const arr = [];
   const getAllCraftWay = (o, cnt) => {
@@ -102,16 +100,16 @@ const ItemInfo = ({ data }) => {
                 <td>
                   <div className={itemBoxWrapper}>
                     {craft.craft.map((c) => {
-                      return <ItemBox data={c} />;
+                      return <ItemBox key={c.item_id} data={c} />;
                     })}
                   </div>
                 </td>
               </tr>
               {arr
                 .filter((v) => !v.is_basic)
-                .map((vv) => {
+                .map((vv, idx) => {
                   return (
-                    <tr>
+                    <tr key={idx}>
                       <td>
                         <Link to={`/${vv.item_name.replace(/ /gi, "-")}`}>
                           {vv.item_name}
@@ -120,7 +118,7 @@ const ItemInfo = ({ data }) => {
                       <td>
                         <div className={itemBoxWrapper}>
                           {vv.craft.map((c) => {
-                            return <ItemBox data={c} />;
+                            return <ItemBox key={c.item_id} data={c} />;
                           })}
                         </div>
                       </td>
@@ -145,7 +143,7 @@ const ItemInfo = ({ data }) => {
                           return acc;
                         }, {}),
                       ).map((v) => {
-                        return <ItemBox data={v} />;
+                        return <ItemBox key={v.item_id} data={v} />;
                       })}
                     </div>
                   </td>
@@ -175,9 +173,9 @@ const ItemInfo = ({ data }) => {
               </tr>
             </thead>
             <tbody>
-              {allIngredient.nodes.map((v) => {
+              {allIngredient.nodes.map((v, idx) => {
                 return (
-                  <tr>
+                  <tr key={idx}>
                     <td>
                       <Link to={`/${v.name.replace(/ /gi, "-")}`}>
                         {v.name}
@@ -185,9 +183,9 @@ const ItemInfo = ({ data }) => {
                     </td>
                     <td>
                       <div className={itemBoxWrapper}>
-                        {v.craft.map((c) => {
-                          return <ItemBox data={c} />;
-                        })}
+                        {v.craft.map((c) => (
+                          <ItemBox key={c.item_id} data={c} />
+                        ))}
                       </div>
                     </td>
                   </tr>
