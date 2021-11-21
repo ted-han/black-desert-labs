@@ -3,7 +3,8 @@ import { Link, navigate } from "gatsby";
 
 import {
   itemWrapperHeader,
-  ingredientWrapper,
+  ingredientTopWrapper,
+  ingredientBottomWrapper,
   itemBoxWrapper,
   itemBox,
   itemBoxHeader,
@@ -83,7 +84,7 @@ const ItemInfo = ({ data }) => {
           <h3>{craft.item_name}</h3>
         </div>
         <h4>조합</h4>
-        <div id={ingredientWrapper}>
+        <div id={ingredientTopWrapper}>
           <table>
             <thead>
               <tr>
@@ -165,7 +166,7 @@ const ItemInfo = ({ data }) => {
     return (
       <>
         <h4>상위 아이템</h4>
-        <div id={ingredientWrapper}>
+        <div id={ingredientBottomWrapper}>
           <table>
             <thead>
               <tr>
