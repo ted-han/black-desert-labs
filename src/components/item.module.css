@@ -1,7 +1,17 @@
+* {
+  font-size: 1.6rem;
+}
+h4 {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
 table {
-    border: 1px solid #7a5d4b;
-    border-collapse: collapse;
-    width: 100%;
+  border: 1px solid #7a5d4b;
+  border-collapse: collapse;
+  width: 100%;
+}
+thead th:nth-child(1) {
+  width: 14rem;
 }
 thead {
   background: #313138;
@@ -9,56 +19,95 @@ thead {
 }
 th {
   border: 1px solid #7a5d4b;
-  padding: 6px; 
+  padding: 0.6rem;
 }
 td {
   border: 1px solid #7a5d4b;
-  padding: 0 6px; 
+  padding: 0 0 0 0.6rem;
 }
-h3 {
-  margin-bottom: 0;
-}
+
 
 
 
 .itemWrapperHeader {
-  margin-top: 20px;
+  margin-top: 2rem;
   display: flex;
   align-items: center;
 }
-.itemWrapperHeader > h4 {
+.itemWrapperHeader > h3 {
   margin-left: 2rem;
-} 
-.itemWrapperFooter {
-  float: right;
+  font-size: 2.4rem;
 }
-.itemWrapper {
+
+
+.itemBoxWrapper {
   display: flex;
   align-items: center;
-
+  flex-wrap:  wrap;
 }
 .itemBox{
+  min-width: 5rem;
   display: flex;
   flex-direction: column;
-  margin: 6px 4px;
+  margin: 0.2rem;
   cursor: pointer;
 }
-.itemBox > span{
+.itemBox > span {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
 }
-.itemBoxHeader{
+.itemBoxHeader {
   position: relative;
+  margin: 0 auto;
 }
-.itemBoxHeader > span{
+.itemBoxHeader > span {
   position: absolute;
   bottom: 0px;
   right: 0px;
-  z-index: 10;
+  z-index: 1;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-shadow: -1px -1px 0 #111, 1px 1px 0 #111, -1px 1px 0 #111, 1px -1px 0 #111;
 }
-
 
 #ingredientWrapper {
   display: flex;
   width: 100%;
+}
+
+
+
+
+@media (max-width: 800px) {
+  .itemWrapperHeader {
+    margin-top: 1rem;
+  }
+  .itemWrapperHeader > img {
+    width: 5rem;
+    height: 5rem;
+  }
+  .itemWrapperHeader > h3 {
+    margin-left: 1.6rem;
+    font-size: 2rem;
+  }
+  thead th:nth-child(1) {
+    width: 20%;
+  }
+  th {
+    font-size: 1.4rem;
+  }
+  .itemBox{
+    min-width: 4rem;
+  }
+  .itemBox > span {
+    font-size: 1rem;
+  }
+  .itemBoxHeader > span, a {
+    font-size: 1.2rem;
+  }
+  .itemBoxHeader > img {
+    width: 3rem;
+    height: 3rem;
+  }
+
 }

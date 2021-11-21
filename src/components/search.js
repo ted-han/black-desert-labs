@@ -4,6 +4,7 @@ import { Link, graphql, StaticQuery, navigate } from "gatsby";
 import {
   searchWrapperMain,
   searchWrapper,
+  searchWrapperTop,
   searchLogo,
   searchInput,
   searchButton,
@@ -53,21 +54,25 @@ const SearchComponent = ({ data, page }) => {
       return null;
     }
     return (
-      <ul>
-        {itemFilterArr.map(({ id, item_name }) => {
-          return (
-            <li key={id}>
-              <Link to={`/${item_name.replace(/ /gi, "-")}`}>{item_name}</Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div id={searchList}>
+        <ul>
+          {itemFilterArr.map(({ id, item_name }) => {
+            return (
+              <li key={id}>
+                <Link to={`/${item_name.replace(/ /gi, "-")}`}>
+                  {item_name}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     );
   };
 
   return (
-    <div>
-      <div id={page === "main" ? searchWrapperMain : searchWrapper}>
+    <div id={page === "main" ? searchWrapperMain : searchWrapper}>
+      <div id={searchWrapperTop}>
         <div id={searchLogo}>
           <Link to={`/`}>
             <img src={`/black.png`} width="100%" />
@@ -83,14 +88,13 @@ const SearchComponent = ({ data, page }) => {
             onBlur={handleInputBlur}
             onFocus={handleInputFocus}
             maxLength="16"
-            autoFocus
           />
         </div>
         <div id={searchButton} onClick={handleClickSearch}>
           <img src={`/search.png`} width="50%" />
         </div>
       </div>
-      <div id={searchList}>{visible && renderSearchResults()}</div>
+      {visible && renderSearchResults()}
     </div>
   );
 };

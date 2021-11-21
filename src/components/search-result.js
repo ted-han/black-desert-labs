@@ -1,11 +1,15 @@
 import React from "react";
-import { Link } from "gatsby";
+import { navigate } from "gatsby";
 import {
   searchReulstList,
   searchReulstListName,
 } from "./searchresult.module.css";
 
 const SearchResultComponent = ({ query, data = [] }) => {
+  const handleClick = (item_name) => {
+    navigate(`/${item_name.replace(/ /gi, "-")}`);
+  };
+
   if (data.length === 0) {
     return (
       <div id={searchReulstList}>
@@ -19,11 +23,9 @@ const SearchResultComponent = ({ query, data = [] }) => {
       <h3 id={searchReulstListName}>검색어: {query}</h3>
       <ul>
         {data.map((v) => (
-          <li key={v.id}>
-            <img alt={`${v.item_id}`} src={`/${v.item_id}.png`} width="30" />
-            <Link to={`/${v.item_name.replace(/ /gi, "-")}`}>
-              {v.item_name}
-            </Link>
+          <li key={v.id} onClick={() => handleClick(v.item_name)}>
+            <img alt={`${v.item_id}`} src={`/${v.item_id}.png`} width="30px" />
+            <span>{v.item_name}</span>
           </li>
         ))}
       </ul>

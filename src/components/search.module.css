@@ -1,38 +1,39 @@
 #searchWrapper {
-  display: flex;
-  width: 30rem;
-  height: 50px;
-  border: solid 1px #7a5d4b;
-  background: #313138;
+  width: 48rem;
+  height: 5rem;
 }
 #searchWrapperMain {
-  display: flex;
-  width: 30rem;
-  height: 50px;
-  border: solid 1px #7a5d4b;
-  background: #313138;
+  width: 48rem;
+  height: 5rem;
   margin: 0 auto;
 }
+#searchWrapperTop {
+  display: flex;
+  border: solid 1px #7a5d4b;
+  background: #313138;
+}
+
+
 
 #searchLogo {
-  width: 3rem; 
+  width: 5rem; 
 }
 #searchInputWrapper {
   display: flex;
   align-items: center;
-  width: 24rem;
+  width: 43rem;
 }
 #searchInput {
   width: 100%;
   padding: 5px 0 5px 15px;
-  font-size: 18px;
+  font-size: 1.8rem;
   outline: none;
   border: none;
   color: #ffffff;
   background: #313138;
 }
 #searchButton {
-  width: 3rem;
+  width: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,27 +43,27 @@
 }
 
 #searchList {
-  width: 30rem;
-  margin: 0 auto;
   position: relative;
-}
-#searchList ul {
-  width: 27rem;
-  position: absolute;
-  right: 0px;
+  z-index: 5;
+  background: #313138;
   border: solid 1px #7a5d4b;
   border-top: none;
-  margin: 0px;
-  padding: 0px;
-  background: #313138;
+  font-size: 1.6rem;
+}
+#searchList ul {
+  margin: 0;
+  padding: 0;  
 }
 #searchList li {
   list-style: none;
-  margin:  0;
-  padding:  5px;
+  margin-left: 5rem;
+  padding: 0.6rem;
+}
+#searchList > ul > li:first-child {
+  padding-top: 1.2rem;
 }
 #searchList li:hover {
-  background: #f6f6f6;
+  background: #4b4b4b;
   cursor: pointer;
 }
 #searchList li a {
@@ -76,20 +77,33 @@
 }
 
 
-
-
 @media (max-width: 800px) {
   #searchWrapper {
-    display: flex;
-    width: 95%;
+    width: 100%;
   }
-  
+  #searchWrapperMain {
+    width: 100%;
+  }
+  #searchWrapperTop {
+    display: flex;
+    border: solid 1px #7a5d4b;
+    background: #313138;
+    border-radius: 5px;
+  }
+
+  #searchInputWrapper {
+    width: 100%;
+  }
+
   #searchList {
-    width: calc(90%+3rem);
+    width: 100%;
     margin: 0 auto;
     position: relative;
   }
   #searchList ul {
     border: none;
+  }
+  #searchList a {
+    font-size: 1.6rem;
   }
 }

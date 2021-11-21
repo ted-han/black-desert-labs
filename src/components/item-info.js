@@ -2,12 +2,11 @@ import * as React from "react";
 import { Link, navigate } from "gatsby";
 
 import {
+  itemWrapperHeader,
   ingredientWrapper,
+  itemBoxWrapper,
   itemBox,
   itemBoxHeader,
-  itemWrapper,
-  itemWrapperHeader,
-  itemWrapperFooter,
 } from "./item.module.css";
 
 const ItemBox = ({ data }) => (
@@ -18,7 +17,12 @@ const ItemBox = ({ data }) => (
     }}
   >
     <div className={itemBoxHeader}>
-      <img alt={`${data.item_name}`} src={`/${data.item_id}.png`} width="30" />
+      <img
+        alt={`${data.item_name}`}
+        src={`/${data.item_id}.png`}
+        width="36px"
+        height="36px"
+      />
       <span>x{data.cnt}</span>
     </div>
     <span>{data.item_name}</span>
@@ -49,9 +53,6 @@ const ItemInfo = ({ data }) => {
   };
 
   getAllCraftWay(data.craft, data.craft.cnt);
-  console.log(data.craft.craft);
-  console.log(arr);
-
   // 페이지 상단
   // 아이템 설명, 제조, 하위제조, 필요한 모든 기본아이템
   const HowCraft = ({ craft, arr }) => {
@@ -65,7 +66,7 @@ const ItemInfo = ({ data }) => {
             width="60"
             height="60"
           />
-          <h4>{craft.item_name}</h4>
+          <h3>{craft.item_name}</h3>
         </div>
       );
     }
@@ -79,9 +80,9 @@ const ItemInfo = ({ data }) => {
             width="60"
             height="60"
           />
-          <h4>{craft.item_name}</h4>
+          <h3>{craft.item_name}</h3>
         </div>
-        <h3>조합</h3>
+        <h4>조합</h4>
         <div id={ingredientWrapper}>
           <table>
             <thead>
@@ -98,7 +99,7 @@ const ItemInfo = ({ data }) => {
                   </Link>
                 </td>
                 <td>
-                  <div className={itemWrapper}>
+                  <div className={itemBoxWrapper}>
                     {craft.craft.map((c) => {
                       return <ItemBox data={c} />;
                     })}
@@ -116,7 +117,7 @@ const ItemInfo = ({ data }) => {
                         </Link>
                       </td>
                       <td>
-                        <div className={itemWrapper}>
+                        <div className={itemBoxWrapper}>
                           {vv.craft.map((c) => {
                             return <ItemBox data={c} />;
                           })}
@@ -125,29 +126,32 @@ const ItemInfo = ({ data }) => {
                     </tr>
                   );
                 })}
+
+              {craft.craft.length !== arr.length && (
+                <tr>
+                  <td>전체</td>
+                  <td>
+                    <div className={itemBoxWrapper}>
+                      {Object.values(
+                        arr.reduce((acc, curr) => {
+                          if (!curr.is_basic) return acc;
+                          if (acc[curr.item_name]) {
+                            acc[curr.item_name].cnt =
+                              acc[curr.item_name].cnt + curr.cnt;
+                            return acc;
+                          }
+                          acc[curr.item_name] = curr;
+                          return acc;
+                        }, {}),
+                      ).map((v) => {
+                        return <ItemBox data={v} />;
+                      })}
+                    </div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
-        </div>
-
-        <div className={itemWrapperFooter}>
-          {craft.craft.length !== arr.length && (
-            <div className={itemWrapper}>
-              {Object.values(
-                arr.reduce((acc, curr) => {
-                  if (!curr.is_basic) return acc;
-                  if (acc[curr.item_name]) {
-                    acc[curr.item_name].cnt =
-                      acc[curr.item_name].cnt + curr.cnt;
-                    return acc;
-                  }
-                  acc[curr.item_name] = curr;
-                  return acc;
-                }, {}),
-              ).map((v) => {
-                return <ItemBox data={v} />;
-              })}
-            </div>
-          )}
         </div>
       </>
     );
@@ -160,7 +164,7 @@ const ItemInfo = ({ data }) => {
 
     return (
       <>
-        <h3>상위 아이템</h3>
+        <h4>상위 아이템</h4>
         <div id={ingredientWrapper}>
           <table>
             <thead>
@@ -179,7 +183,7 @@ const ItemInfo = ({ data }) => {
                       </Link>
                     </td>
                     <td>
-                      <div className={itemWrapper}>
+                      <div className={itemBoxWrapper}>
                         {v.craft.map((c) => {
                           return <ItemBox data={c} />;
                         })}
@@ -195,7 +199,6 @@ const ItemInfo = ({ data }) => {
     );
   };
 
-  console.log(1);
   return (
     <div>
       <HowCraft craft={data.craft} arr={arr} />
