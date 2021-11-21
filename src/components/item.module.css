@@ -101,7 +101,7 @@ td {
   .itemBox > span {
     font-size: 1rem;
   }
-  .itemBoxHeader > span, a {
+  .itemBoxHeader > span, a, td {
     font-size: 1.2rem;
   }
   .itemBoxHeader > img {
