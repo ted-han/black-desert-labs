@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-
+import Seo from "../components/seo";
 import SearchComponent from "../components/search";
 import SearchResultComponent from "../components/search-result";
 
@@ -13,7 +13,11 @@ const IndexPage = ({ data, location }) => {
 
   return (
     <main>
-      <title>검은사막</title>
+      <Seo
+        title={`검색결과:${query} - 검은사막 연구소. 검은사막 검색 ${query}`}
+        description={`검색결과:${query} - 검은사막 연구소. 검은사막 검색 ${query}`}
+        keywords={`검은사막 ${query}, 검은사막 생활, 검은사막 요리`}
+      />
       <SearchComponent page="search" />
       <SearchResultComponent query={query} data={filterData} />
     </main>
