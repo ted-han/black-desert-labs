@@ -1,54 +1,18 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# 검은사막 연구소
+[https://blackdesertlabsmain.gatsbyjs.io](https://blackdesertlabsmain.gatsbyjs.io)
 
-## 🚀 Quick start
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/53431881/142859803-d08f5fd3-4872-4129-a26e-4257f1321add.gif)
 
-1.  **Create a Gatsby site.**
+## 목표
+검은사막 생활콘텐츠 **제작**을 좀 더 쉽게 알아보자!
+* 공식 제작노트는 인게임에 위치 (F2누르고 껐다 켰다..😭)
+* 아이템을 제작을 위한 연관관계가 조금(?) 불친절
+* 웹보다는 모바일로 확인하는게 편함
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+> 현재는 요리정보만 있습니다. 꾸준히 연금, 가공, 제작 등을 추가할 예정입니다.
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
-
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
-
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
-
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+## 관련기술
+- React
+- Gatsby
+- PostgreSQL
+- SEO
