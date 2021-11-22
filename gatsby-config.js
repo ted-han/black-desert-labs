@@ -10,5 +10,11 @@ module.exports = {
     `gatsby-plugin-postgresql`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: ["G-X9NRBHGPR3"],
+      },
+    },
   ],
 };
