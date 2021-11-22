@@ -6,6 +6,8 @@ module.exports = {
     siteUrl: `https://blackdesertlabsmain.gatsbyjs.io`,
   },
   plugins: [
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-robots-txt",
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-postgresql`,
     `gatsby-plugin-image`,
@@ -16,7 +18,5 @@ module.exports = {
         trackingIds: ["G-X9NRBHGPR3"],
       },
     },
-    "gatsby-plugin-sitemap",
-    "gatsby-plugin-robots-txt",
   ],
 };
