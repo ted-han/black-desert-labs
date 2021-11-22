@@ -49,7 +49,7 @@ a:hover {
     padding: 1.5rem 1.5rem 3rem 1.5rem;
     width: calc(100% - 3rem);
     margin: 0;
-    min-height: calc(100vh - 3rem);;
+    min-height: calc(100vh - 4.5rem);;
   }
   main > h1 {
     display: none;
