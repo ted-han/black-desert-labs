@@ -8,9 +8,10 @@ import {
   itemBoxWrapper,
   itemBox,
   itemBoxHeader,
+  mainItemDivider,
 } from "./item.module.css";
 
-const ItemBox = ({ data }) => (
+const ItemBox = ({ data, total = false }) => (
   <div
     className={itemBox}
     onClick={() => {
@@ -24,7 +25,7 @@ const ItemBox = ({ data }) => (
         width="36px"
         height="36px"
       />
-      <span>x{data.cnt}</span>
+      <span>x{total ? data.total : data.cnt}</span>
     </div>
     <span>{data.item_name}</span>
   </div>
@@ -35,23 +36,31 @@ const ItemInfo = ({ data }) => {
   // 현재 아이템의 재료 중 조합이 필요한 아이템이 있는지 확인
   const arr = [];
   const getAllCraftWay = (o, cnt) => {
-    o.craft.map((v, index) => {
+    o.craft.map((v) => {
       if (v.is_basic) {
         arr.push({
           ...v,
           total: cnt * v.cnt,
+          main: v.main ?? false,
         });
         return;
       }
       arr.push({
         ...v,
         total: cnt * v.cnt,
+        main: v.main ?? false,
       });
       return getAllCraftWay({ ...v, craft: v.craft }, cnt * v.cnt);
     });
   };
+  getAllCraftWay(
+    {
+      ...data.craft,
+      craft: data.craft.craft.map((v) => ({ ...v, main: true })),
+    },
+    data.craft.cnt,
+  );
 
-  getAllCraftWay(data.craft, data.craft.cnt);
   // 페이지 상단
   // 아이템 설명, 제조, 하위제조, 필요한 모든 기본아이템
   const HowCraft = ({ craft, arr }) => {
@@ -109,7 +118,7 @@ const ItemInfo = ({ data }) => {
                 .filter((v) => !v.is_basic)
                 .map((vv, idx) => {
                   return (
-                    <tr key={idx}>
+                    <tr key={idx} className={vv.main ? mainItemDivider : ""}>
                       <td>
                         <Link to={`/${vv.item_name.replace(/ /gi, "-")}`}>
                           {vv.item_name}
@@ -135,15 +144,17 @@ const ItemInfo = ({ data }) => {
                         arr.reduce((acc, curr) => {
                           if (!curr.is_basic) return acc;
                           if (acc[curr.item_name]) {
-                            acc[curr.item_name].cnt =
-                              acc[curr.item_name].cnt + curr.cnt;
+                            acc[curr.item_name].total =
+                              acc[curr.item_name].total + curr.total;
                             return acc;
                           }
                           acc[curr.item_name] = curr;
                           return acc;
                         }, {}),
                       ).map((v) => {
-                        return <ItemBox key={v.item_id} data={v} />;
+                        return (
+                          <ItemBox key={v.item_id} data={v} total={true} />
+                        );
                       })}
                     </div>
                   </td>

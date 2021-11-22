@@ -22,8 +22,12 @@ th {
   padding: 0.6rem;
 }
 td {
-  border: 1px solid #7a5d4b;
+  border-right: 1px solid #7a5d4b;
   padding: 0 0 0 0.6rem;
+}
+
+.mainItemDivider {
+  border-top: 1px solid #7a5d4b;;
 }
 
 .itemWrapperHeader {
@@ -72,8 +76,12 @@ td {
   display: flex;
   width: 100%;
 }
-#ingredientTopWrapper tbody tr:nth-child(2){
-  border-top: 3px solid #7a5d4b;
+#ingredientBottomWrapper td {
+  border: 1px solid #7a5d4b;
+}
+#ingredientTopWrapper tbody tr:nth-child(2),
+#ingredientTopWrapper tbody tr:nth-last-child(1) {
+  border-top: 2px solid #7a5d4b;
 }
 
 
