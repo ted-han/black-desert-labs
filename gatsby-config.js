@@ -3,7 +3,7 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "검은사막 연구소",
     description: `검은사막 연구소입니다. 아이템 조합, 생활, 요리, 연금 등의 정보를 제공합니다.`,
-    siteUrl: `https://blackdesertlabsmain.gatsbyjs.io/`,
+    siteUrl: `https://blackdesertlabsmain.gatsbyjs.io`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -16,5 +16,7 @@ module.exports = {
         trackingIds: ["G-X9NRBHGPR3"],
       },
     },
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-robots-txt",
   ],
 };
