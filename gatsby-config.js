@@ -17,5 +17,17 @@ module.exports = {
         trackingIds: ["G-X9NRBHGPR3"],
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `검은사막 연구소`,
+        short_name: `검사 연구소`,
+        start_url: `/`,
+        background_color: `#1c1c21`,
+        theme_color: `#bc8e61`,
+        display: `standalone`,
+        icon: `src/images/icon.png`,
+      },
+    },
   ],
 };
