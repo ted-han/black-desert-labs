@@ -93,12 +93,6 @@ const ItemInfo = ({ data }) => {
         <h4>조합</h4>
         <div id={ingredientTopWrapper}>
           <table>
-            <thead>
-              <tr>
-                <th>아이템</th>
-                <th>재료</th>
-              </tr>
-            </thead>
             <tbody>
               <tr>
                 <td>
@@ -114,6 +108,13 @@ const ItemInfo = ({ data }) => {
                   </div>
                 </td>
               </tr>
+            </tbody>
+          </table>
+        </div>
+        <h4 style={{ margin: 0 }}>하위 조합</h4>
+        <div id={ingredientTopWrapper}>
+          <table>
+            <tbody>
               {arr
                 .filter((v) => !v.is_basic)
                 .map((vv, idx) => {
@@ -177,12 +178,6 @@ const ItemInfo = ({ data }) => {
         <h4>상위 아이템</h4>
         <div id={ingredientBottomWrapper}>
           <table>
-            <thead>
-              <tr>
-                <th>아이템</th>
-                <th>재료</th>
-              </tr>
-            </thead>
             <tbody>
               {allIngredient.nodes.map((v, idx) => {
                 return (
