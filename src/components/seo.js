@@ -20,7 +20,6 @@ const Seo = ({ description, meta, title, lang, keywords }) => {
 
   const metaDescription = description || site.siteMetadata.description;
   const metaKeywords = keywords || site.siteMetadata?.title;
-  const defaultTitle = site.siteMetadata?.title;
 
   return (
     <Helmet
@@ -28,7 +27,6 @@ const Seo = ({ description, meta, title, lang, keywords }) => {
         lang: site.siteMetadata?.lang,
       }}
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
       meta={[
         {
           name: `google-site-verification`,

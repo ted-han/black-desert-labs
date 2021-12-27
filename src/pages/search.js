@@ -10,12 +10,14 @@ const IndexPage = ({ data, location }) => {
   const filterData = data.allCraft.nodes.filter(
     (v) => v.item_name.includes(query) && query !== "",
   );
+  let desc = `검색어: ${query}`;
+  filterData.forEach((v) => (desc = `${desc}, ${v.item_name}`));
 
   return (
     <main>
       <Seo
-        title={`검색결과:${query} - 검은사막 연구소. 검은사막 검색 ${query}`}
-        description={`검색결과:${query} - 검은사막 연구소. 검은사막 검색 ${query}`}
+        title={`"${query}" 검색결과 - 검은사막 연구소`}
+        description={desc}
         keywords={`검은사막 ${query}, 검은사막 생활, 검은사막 요리`}
       />
       <SearchComponent page="search" />

@@ -5,11 +5,15 @@ import ItemInfo from "../components/item-info";
 import SearchComponent from "../components/search";
 
 export default function Item({ data }) {
+  let desc = `${data.craft.item_name}`;
+  data.craft.craft.forEach(
+    (v) => (desc = `${desc}, ${v.item_name} ${v.cnt}개`),
+  );
   return (
     <main>
       <Seo
         title={`${data.craft.item_name} - 검은사막 연구소`}
-        description={`${data.craft.item_name} - 검은사막 연구소. 검은사막 ${data.craft.item_name} 조합, 검은사막 요리`}
+        description={desc}
         keywords={`검은사막 ${data.craft.item_name}, 검은사막 생활, 검은사막 요리`}
       />
       <SearchComponent page="item" />
