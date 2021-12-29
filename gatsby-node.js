@@ -1,4 +1,4 @@
-const path = require(`path`);
+const { replaceItemObj } = require(`./src/components/common`);
 
 exports.createPages = async ({ graphql, actions }) => {
   const { data } = await graphql(`
@@ -18,7 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: require.resolve(`./src/pages/item.js`),
       context: {
         id: node.id,
-        name: node.item_name,
+        name: replaceItemObj[node.item_name] || node.item_name,
       },
     });
   });

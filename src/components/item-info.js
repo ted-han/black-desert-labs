@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link, navigate } from "gatsby";
+import { replaceItemObj, replaceItemArr } from "./common";
 
 import {
   itemWrapperHeader,
@@ -66,16 +67,34 @@ const ItemInfo = ({ data }) => {
   const HowCraft = ({ craft, arr }) => {
     // 가장 기본이 되는 원재료인 경우, 조합이 필요없는 경우
     if (craft.is_basic) {
+      const replaceItemName = replaceItemObj[craft.item_name];
+      let replaceItemNameText = `${replaceItemName}: `;
+      if (replaceItemName) {
+        const arr = replaceItemArr[replaceItemName];
+        for (let i = 0; i < arr.length; i++) {
+          replaceItemNameText = replaceItemNameText + arr[i];
+          if (i !== arr.length - 1) {
+            replaceItemNameText = replaceItemNameText + ", ";
+          }
+        }
+      }
       return (
-        <div className={itemWrapperHeader}>
-          <img
-            alt={`${craft.item_name}`}
-            src={`/${craft.item_id}.png`}
-            width="60"
-            height="60"
-          />
-          <h3>{craft.item_name}</h3>
-        </div>
+        <>
+          <div className={itemWrapperHeader}>
+            <img
+              alt={`${craft.item_name}`}
+              src={`/${craft.item_id}.png`}
+              width="60"
+              height="60"
+            />
+            <h3>{craft.item_name}</h3>
+          </div>
+          {replaceItemName && (
+            <div>
+              <span>{replaceItemNameText}</span>
+            </div>
+          )}
+        </>
       );
     }
 
