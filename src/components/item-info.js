@@ -208,9 +208,14 @@ const ItemInfo = ({ data }) => {
                     </td>
                     <td>
                       <div className={itemBoxWrapper}>
-                        {v.craft.map((c) => (
-                          <ItemBox key={c.item_id} data={c} />
-                        ))}
+                        {v.craft
+                          .filter((c) => c.item_name === v.ingredient)
+                          .concat(
+                            v.craft.filter((c) => c.item_name !== v.ingredient),
+                          )
+                          .map((c) => (
+                            <ItemBox key={c.item_id} data={c} />
+                          ))}
                       </div>
                     </td>
                   </tr>
