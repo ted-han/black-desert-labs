@@ -130,59 +130,66 @@ const ItemInfo = ({ data }) => {
             </tbody>
           </table>
         </div>
-        <h4 style={{ margin: 0 }}>하위 조합</h4>
-        <div id={ingredientTopWrapper}>
-          <table>
-            <tbody>
-              {arr
-                .filter((v) => !v.is_basic)
-                .map((vv, idx) => {
-                  return (
-                    <tr key={idx} className={vv.main ? mainItemDivider : ""}>
-                      <td>
-                        <Link to={`/${vv.item_name.replace(/ /gi, "-")}`}>
-                          {vv.item_name}
-                        </Link>
-                      </td>
+        {arr.filter((v) => !v.is_basic).length !== 0 && (
+          <>
+            <h4 style={{ margin: 0 }}>하위 조합</h4>
+            <div id={ingredientTopWrapper}>
+              <table>
+                <tbody>
+                  {arr
+                    .filter((v) => !v.is_basic)
+                    .map((vv, idx) => {
+                      return (
+                        <tr
+                          key={idx}
+                          className={vv.main ? mainItemDivider : ""}
+                        >
+                          <td>
+                            <Link to={`/${vv.item_name.replace(/ /gi, "-")}`}>
+                              {vv.item_name}
+                            </Link>
+                          </td>
+                          <td>
+                            <div className={itemBoxWrapper}>
+                              {vv.craft.map((c) => {
+                                return <ItemBox key={c.item_id} data={c} />;
+                              })}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+
+                  {craft.craft.length !== arr.length && (
+                    <tr>
+                      <td>전체</td>
                       <td>
                         <div className={itemBoxWrapper}>
-                          {vv.craft.map((c) => {
-                            return <ItemBox key={c.item_id} data={c} />;
+                          {Object.values(
+                            arr.reduce((acc, curr) => {
+                              if (!curr.is_basic) return acc;
+                              if (acc[curr.item_name]) {
+                                acc[curr.item_name].total =
+                                  acc[curr.item_name].total + curr.total;
+                                return acc;
+                              }
+                              acc[curr.item_name] = curr;
+                              return acc;
+                            }, {}),
+                          ).map((v) => {
+                            return (
+                              <ItemBox key={v.item_id} data={v} total={true} />
+                            );
                           })}
                         </div>
                       </td>
                     </tr>
-                  );
-                })}
-
-              {craft.craft.length !== arr.length && (
-                <tr>
-                  <td>전체</td>
-                  <td>
-                    <div className={itemBoxWrapper}>
-                      {Object.values(
-                        arr.reduce((acc, curr) => {
-                          if (!curr.is_basic) return acc;
-                          if (acc[curr.item_name]) {
-                            acc[curr.item_name].total =
-                              acc[curr.item_name].total + curr.total;
-                            return acc;
-                          }
-                          acc[curr.item_name] = curr;
-                          return acc;
-                        }, {}),
-                      ).map((v) => {
-                        return (
-                          <ItemBox key={v.item_id} data={v} total={true} />
-                        );
-                      })}
-                    </div>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
       </>
     );
   };
