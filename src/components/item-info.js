@@ -66,18 +66,18 @@ const ItemInfo = ({ data }) => {
   // 아이템 설명, 제조, 하위제조, 필요한 모든 기본아이템
   const HowCraft = ({ craft, arr }) => {
     // 가장 기본이 되는 원재료인 경우, 조합이 필요없는 경우
-    if (craft.is_basic) {
-      const replaceItemName = replaceItemObj[craft.item_name];
-      let replaceItemNameText = `${replaceItemName}: `;
-      if (replaceItemName) {
-        const arr = replaceItemArr[replaceItemName];
-        for (let i = 0; i < arr.length; i++) {
-          replaceItemNameText = replaceItemNameText + arr[i];
-          if (i !== arr.length - 1) {
-            replaceItemNameText = replaceItemNameText + ", ";
-          }
+    const replaceItemName = replaceItemObj[craft.item_name];
+    let replaceItemNameText = `${replaceItemName}: `;
+    if (replaceItemName) {
+      const arr = replaceItemArr[replaceItemName];
+      for (let i = 0; i < arr.length; i++) {
+        replaceItemNameText = replaceItemNameText + arr[i];
+        if (i !== arr.length - 1) {
+          replaceItemNameText = replaceItemNameText + ", ";
         }
       }
+    }
+    if (craft.is_basic) {
       return (
         <>
           <div className={itemWrapperHeader}>
@@ -109,6 +109,11 @@ const ItemInfo = ({ data }) => {
           />
           <h3>{craft.item_name}</h3>
         </div>
+        {replaceItemName && (
+          <div>
+            <span>{replaceItemNameText}</span>
+          </div>
+        )}
         <h4>조합</h4>
         <div id={ingredientTopWrapper}>
           <table>
