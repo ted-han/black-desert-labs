@@ -10,6 +10,8 @@ const IndexPage = ({ data, location }) => {
   const filterData = data.allCraft.nodes.filter(
     (v) => v.item_name.includes(query) && query !== "",
   );
+
+  // SEO description 부분
   let desc = `검색어: ${query}`;
   filterData.forEach((v) => (desc = `${desc}, ${v.item_name}`));
 

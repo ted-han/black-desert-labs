@@ -189,7 +189,7 @@ const ItemInfo = ({ data }) => {
 
   // 페이지 하단
   // 해당 아이템을 이용하여 만들 수 있는 아이템 전체
-  const HowIngredient = ({ allIngredient }) => {
+  const HowIngredient = ({ allIngredient, itemName, itemId }) => {
     if (allIngredient.nodes.length === 0) return null;
 
     return (
@@ -213,9 +213,21 @@ const ItemInfo = ({ data }) => {
                           .concat(
                             v.craft.filter((c) => c.item_name !== v.ingredient),
                           )
-                          .map((c) => (
-                            <ItemBox key={c.item_id} data={c} />
-                          ))}
+                          .map((c, i) => {
+                            if (i === 0) {
+                              return (
+                                <ItemBox
+                                  key={c.item_id}
+                                  data={{
+                                    ...c,
+                                    item_id: itemId,
+                                    item_name: itemName,
+                                  }}
+                                />
+                              );
+                            }
+                            return <ItemBox key={c.item_id} data={c} />;
+                          })}
                       </div>
                     </td>
                   </tr>
@@ -231,7 +243,11 @@ const ItemInfo = ({ data }) => {
   return (
     <div>
       <HowCraft craft={data.craft} arr={arr} />
-      <HowIngredient allIngredient={data.allIngredient} />
+      <HowIngredient
+        allIngredient={data.allIngredient}
+        itemId={data.craft.item_id}
+        itemName={data.craft.item_name}
+      />
     </div>
   );
 };
