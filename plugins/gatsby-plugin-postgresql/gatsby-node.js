@@ -14,13 +14,13 @@ const getCraftInfo = () => {
       select 
         i.item_id,
         i.item_name,
-        c.ingredient,
+        (select item_name from items where item_id = c.ingredient) as ingredient,
         coalesce(c.ingredient_cnt,0) as ingredient_cnt,
         i.is_basic,
         i.category
       from items i
       left join craft c
-      on i.item_name = c.craft_name
+      on i.item_id = c.craft_name
     ) x
     group by item_id, item_name, is_basic, category;
   `,
@@ -49,24 +49,24 @@ const getIngredientInfo = () => {
         select 
           i.item_id,
           i.item_name,
-          c.ingredient,
+          (select item_name from items where item_id = c.ingredient) as ingredient,
           coalesce(c.ingredient_cnt,0) as ingredient_cnt,
           i.is_basic,
           i.category
         from items i
         left join craft c
-        on i.item_name = c.craft_name
+        on i.item_id = c.craft_name
       ) x
       group by item_id, item_name, is_basic, category
     )
     SELECT 
-      step1.craft_name as name,
-      step1.ingredient,
+      step2.item_name as name,
+      (select item_name from items where item_id = step1.ingredient) as ingredient,
       step2.craft
-    FROM step1 
+    FROM step1
     INNER JOIN step2
-    ON step1.craft_name = step2.item_name
-    ORDER BY step1.craft_name;
+    ON step1.craft_name = step2.item_id
+    ORDER BY name;
   `,
     [],
   );
