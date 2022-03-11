@@ -11,7 +11,7 @@ const IndexPage = ({ data, location }) => {
     (v) => v.item_name.includes(query) && query !== "",
   );
 
-  // SEO description 부분
+  // SEO description 부분 ㅓ
   let desc = `검색어: ${query}`;
   filterData.forEach((v) => (desc = `${desc}, ${v.item_name}`));
 
